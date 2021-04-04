@@ -3,3 +3,7 @@ amazon_review_data.7z
 data/
 amazon_review_data.pd
 twitter_secrets.py
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
