@@ -24,10 +24,10 @@ import tensorflow as tf
 model = keras.models.load_model("ltsm_model_5_epoch_better.tf")
 # %%
 with tf.device("CPU:0"):
-    print(model.predict(["Hello there, great wheather we are having"]))
+    print(model.predict(["The weather is quite good today"]))
 # %%
 replies = []
-for tweet in tweepy.Cursor(api.search, q='to:'+name, result_type='recent', timeout=999999).items(50000):
+for tweet in tweepy.Cursor(api.search, q='to:'+name, result_type='recent', timeout=999999).items(50):
     # print(tweet)
     replies.append((tweet.created_at,tweet.text))
     # if hasattr(tweet, 'in_reply_to_status_id_str'):
@@ -42,7 +42,8 @@ for tweet in tweepy.Cursor(api.search, q='to:'+name, result_type='recent', timeo
 #         row = {'user': tweet.user.screen_name,
 #                'text': tweet.text.replace('\n', ' ')}
 #         csv_writer.writerow(row)
-
+# %%
+replies
 # %%
 text = []
 import re
@@ -51,6 +52,8 @@ for reply in replies:
     if len(temp) > 10:
         text.append(temp)
     # text.append(.replace('@Microsoft',''))
+# %%
+text
 # %%
 preds = []
 with tf.device("CPU:0"):
@@ -67,8 +70,5 @@ for x in text:
     if len(x) < 5:
         len_thing.append(1)
 print(len(len_thing))
-# %%
-f
-# %%
-print(len(f))
+
 # %%
